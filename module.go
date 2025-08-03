@@ -32,6 +32,7 @@ func (p *Provider) Provision(ctx caddy.Context) error {
 }
 
 func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
+	replacer := caddy.NewReplacer()
 	for dispenser.Next() {
 		if dispenser.NextArg() {
 			return dispenser.ArgErr()
@@ -41,7 +42,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 			switch dispenser.Val() {
 			case "username":
 				if dispenser.NextArg() {
-					p.credentials.Username = dispenser.Val()
+					p.credentials.Username = replacer.ReplaceAll(dispenser.Val(), "")
 				}
 
 				if dispenser.NextArg() {
@@ -50,7 +51,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "password":
 				if dispenser.NextArg() {
-					p.credentials.Password = dispenser.Val()
+					p.credentials.Password = replacer.ReplaceAll(dispenser.Val(), "")
 				}
 
 				if dispenser.NextArg() {
@@ -59,7 +60,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "account_id":
 				if dispenser.NextArg() {
-					p.credentials.AccountID = dispenser.Val()
+					p.credentials.AccountID = replacer.ReplaceAll(dispenser.Val(), "")
 				}
 
 				if dispenser.NextArg() {
@@ -68,7 +69,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "project_name":
 				if dispenser.NextArg() {
-					p.credentials.ProjectName = dispenser.Val()
+					p.credentials.ProjectName = replacer.ReplaceAll(dispenser.Val(), "")
 				}
 
 				if dispenser.NextArg() {
