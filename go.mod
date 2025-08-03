@@ -3,8 +3,12 @@ module github.com/jfk9w-go/caddy-dns-selectel
 go 1.24.5
 
 require (
+	github.com/caddyserver/caddy/v2 v2.10.0
+	github.com/jfk9w-go/libdns-selectel v0.0.0-20250803190601-355159866a7b
+)
+
+require (
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/caddyserver/caddy/v2 v2.10.0 // indirect
 	github.com/caddyserver/certmagic v0.23.0 // indirect
 	github.com/caddyserver/zerossl v0.1.3 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
@@ -17,7 +21,6 @@ require (
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/google/pprof v0.0.0-20231212022811-ec68065c825e // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/jfk9w-go/libdns-selectel v0.0.0-20250803183615-e63d7f072c58 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/libdns/libdns v1.1.0 // indirect
