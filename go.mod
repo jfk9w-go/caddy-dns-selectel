@@ -4,7 +4,7 @@ go 1.24.5
 
 require (
 	github.com/caddyserver/caddy/v2 v2.10.0
-	github.com/jfk9w-go/libdns-selectel v0.0.0-20250803192624-3fe2facb14e4
+	github.com/jfk9w-go/libdns-selectel v0.0.0-20250803193730-f5fb22493c6b
 )
 
 require (

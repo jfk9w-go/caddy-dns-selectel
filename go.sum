@@ -82,8 +82,8 @@ github.com/grpc-ecosystem/grpc-gateway v1.5.0/go.mod h1:RSKVYQBd5MCa4OVpNdGskqpg
 github.com/jarcoal/httpmock v1.3.1 h1:iUx3whfZWVf3jT01hQTO/Eo5sAYtB2/rqaUuOtpInww=
 github.com/jarcoal/httpmock v1.3.1/go.mod h1:3yb8rc4BI7TCBhFY8ng0gjuLKJNquuDNiPaZjnENuYg=
 github.com/jellevandenhooff/dkim v0.0.0-20150330215556-f50fe3d243e1/go.mod h1:E0B/fFc00Y+Rasa88328GlI/XbtyysCtTHZS8h7IrBU=
-github.com/jfk9w-go/libdns-selectel v0.0.0-20250803192624-3fe2facb14e4 h1:+sgr9Ggekzo/kA5VEzS7revXeXCdCrI6U5y3EQwJMo4=
-github.com/jfk9w-go/libdns-selectel v0.0.0-20250803192624-3fe2facb14e4/go.mod h1:LawR0bk7wKqHDzXpTb/M5xH4g6IO2OqOtlooiMc9M88=
+github.com/jfk9w-go/libdns-selectel v0.0.0-20250803193730-f5fb22493c6b h1:2B16tkGz3KLCIxXxqC/7wp6Ia6QhKtA9aP2M9qlhvp8=
+github.com/jfk9w-go/libdns-selectel v0.0.0-20250803193730-f5fb22493c6b/go.mod h1:LawR0bk7wKqHDzXpTb/M5xH4g6IO2OqOtlooiMc9M88=
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
 github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
 github.com/json-iterator/go v1.1.6/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=
