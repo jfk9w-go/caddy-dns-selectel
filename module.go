@@ -1,15 +1,12 @@
 package selectel
 
 import (
-	"errors"
-
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 	selectel "github.com/jfk9w-go/libdns-selectel"
 )
 
 type Provider struct {
-	credentials selectel.Credentials
 	*selectel.Provider
 }
 
@@ -21,18 +18,22 @@ func (Provider) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID: "dns.providers.selectel",
 		New: func() caddy.Module {
-			return new(Provider)
+			return &Provider{
+				Provider: new(selectel.Provider),
+			}
 		},
 	}
 }
 
 func (p *Provider) Provision(ctx caddy.Context) error {
-	p.Provider = selectel.NewProvider(selectel.NewClient(p.credentials))
-	return nil
+	p.Credentials.Username = caddy.NewReplacer().ReplaceAll(p.Credentials.Username, "")
+	p.Credentials.Password = caddy.NewReplacer().ReplaceAll(p.Credentials.Password, "")
+	p.Credentials.AccountID = caddy.NewReplacer().ReplaceAll(p.Credentials.AccountID, "")
+	p.Credentials.ProjectName = caddy.NewReplacer().ReplaceAll(p.Credentials.ProjectName, "")
+	return p.Credentials.Validate()
 }
 
 func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
-	replacer := caddy.NewReplacer()
 	for dispenser.Next() {
 		if dispenser.NextArg() {
 			return dispenser.ArgErr()
@@ -42,7 +43,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 			switch dispenser.Val() {
 			case "username":
 				if dispenser.NextArg() {
-					p.credentials.Username = replacer.ReplaceAll(dispenser.Val(), "")
+					p.Credentials.Username = dispenser.Val()
 				}
 
 				if dispenser.NextArg() {
@@ -51,7 +52,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "password":
 				if dispenser.NextArg() {
-					p.credentials.Password = replacer.ReplaceAll(dispenser.Val(), "")
+					p.Credentials.Password = dispenser.Val()
 				}
 
 				if dispenser.NextArg() {
@@ -60,7 +61,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "account_id":
 				if dispenser.NextArg() {
-					p.credentials.AccountID = replacer.ReplaceAll(dispenser.Val(), "")
+					p.Credentials.AccountID = dispenser.Val()
 				}
 
 				if dispenser.NextArg() {
@@ -69,7 +70,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 
 			case "project_name":
 				if dispenser.NextArg() {
-					p.credentials.ProjectName = replacer.ReplaceAll(dispenser.Val(), "")
+					p.Credentials.ProjectName = dispenser.Val()
 				}
 
 				if dispenser.NextArg() {
@@ -79,23 +80,7 @@ func (p *Provider) UnmarshalCaddyfile(dispenser *caddyfile.Dispenser) error {
 		}
 	}
 
-	if p.credentials.Username == "" {
-		return errors.New("no username provided")
-	}
-
-	if p.credentials.Password == "" {
-		return errors.New("no password provided")
-	}
-
-	if p.credentials.AccountID == "" {
-		return errors.New("no account id provided")
-	}
-
-	if p.credentials.ProjectName == "" {
-		return errors.New("no project name provided")
-	}
-
-	return nil
+	return p.Credentials.Validate()
 }
 
 // type guards
